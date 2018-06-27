@@ -4,6 +4,56 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {
+      Pages: <Profile />,
+    highlighted: "item",
+    lighttwo: "item",
+    lightthree: "item",
+    lightfour: "item"
+    }
+
+  }
+
+  handleEvent = (event) => {
+    // event.preventDefault();
+    this.setState({
+      highlighted: "item",
+      lighttwo: "item",
+      lightthree: "item",
+      lightfour: "item"
+    })
+    if (event.target.id == "profile") {
+      console.log(event.target)
+      this.setState({
+        Pages: <Profile />,
+      highlighted: "item active"
+      })
+      console.log(this.state)
+
+    } else if (event.target.id == "photo") {
+      console.log(event.target)
+      this.setState({
+        Pages: <Photos />,
+      lighttwo: "item active"
+      })
+    } else if (event.target.id == "cocktail") {
+      console.log(event.target)
+      this.setState({
+        Pages: <Cocktails />,
+      lightthree: "item active"
+      })
+
+    } else if (event.target.id == "pokemon") {
+      console.log(event.target)
+      this.setState({
+        Pages: <Pokemon />,
+      lightfour: "item active"
+      })
+    }
+
+  }
 
   render() {
 
@@ -13,12 +63,15 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    var detailsToDisplay = this.state.Pages
 
     return (
-      <div>
-        <MenuBar />
+      <div >
+        <MenuBar onClick={this.handleEvent} onSame={this.state.highlighted} onNext={this.state.lighttwo}
+          onAlso={this.state.lightthree} onLast={this.state.lightfour}
+          />
         {detailsToDisplay}
+
       </div>
     )
   }
