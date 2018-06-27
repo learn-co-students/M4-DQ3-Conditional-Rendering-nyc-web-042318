@@ -1,8 +1,42 @@
 import React from 'react'
 import MenuBar from '../components/MenuBar.js'
-import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
+import { Profile, Photos, Cocktails, Pokemon } from '../components/Pages.js'
 
 class MainBox extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      activePage: ''
+    }
+  }
+
+  handleState = (event) => {
+    switch (event.target.id) {
+      case 'profile':
+        this.setState({
+          activePage: <Profile />
+        })
+        break;
+      case 'photo':
+        this.setState({
+          activePage: <Photos />
+        });
+        break;
+      case 'cocktail':
+        this.setState({
+          activePage: <Cocktails />
+        });
+        break;
+      case 'pokemon':
+        this.setState({
+          activePage: <Pokemon />
+        });
+        break;
+    }
+  }
+
+
 
 
   render() {
@@ -13,11 +47,11 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    const detailsToDisplay = this.state.activePage
 
     return (
       <div>
-        <MenuBar />
+        <MenuBar handleState={this.handleState}/>
         {detailsToDisplay}
       </div>
     )
