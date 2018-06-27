@@ -3,7 +3,25 @@ import MenuBar from '../components/MenuBar.js'
 import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
+  constructor(props) {
+    super(props)
 
+    this.state= {
+      selectedItem: "profile"
+    }
+  }
+
+  changeSelected = (event) => {
+    if (event.target.id === "profile") {
+      this.setState({selectedItem: 'profile'})
+    } else if (event.target.id === "photo") {
+      this.setState({selectedItem: "photo"})
+    } else if (event.target.id === "cocktail") {
+      this.setState({selectedItem: 'cocktail'})
+    } else if (event.target.id === "pokemon") {
+      this.setState({selectedItem: "pokemon"})
+    }
+  }
 
   render() {
 
@@ -17,8 +35,11 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar getSelectedPage={this.changeSelected} />
+        {this.state.selectedItem === "profile" ? <Profile /> : null}
+        {this.state.selectedItem === "photo" ? <Photos /> : null}
+        {this.state.selectedItem === "cocktail" ? <Cocktails /> : null}
+        {this.state.selectedItem === "pokemon" ? <Pokemon /> : null}
       </div>
     )
   }
