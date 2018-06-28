@@ -4,6 +4,28 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    selected: "profile"
+  }
+
+  myFunc = (event) => {
+    this.setState({selected: event.target.id})
+  }
+
+  selectPage = () => {
+    console.log(this.state.selected)
+    let result = ""
+    if (this.state.selected === "profile") {
+      result = <Profile />
+    } else if (this.state.selected === "photo") {
+      result = <Photos />
+    } else if (this.state.selected === "cocktail") {
+      result = <Cocktails />
+    } else {
+      result = <Pokemon />
+    }
+    return result
+  }
 
   render() {
 
@@ -13,11 +35,12 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+
+    let detailsToDisplay = this.selectPage();
 
     return (
       <div>
-        <MenuBar />
+        <MenuBar selectProp={this.state.selected} onClick={this.myFunc} />
         {detailsToDisplay}
       </div>
     )
